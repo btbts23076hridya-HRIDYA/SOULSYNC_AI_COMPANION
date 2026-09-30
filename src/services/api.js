@@ -1,3 +1,4 @@
+const API_BASE = 'https://soulsync-ai-companion-2.onrender.com';
 const getToken = () => localStorage.getItem('soulsync_token');
 
 const authFetch = async (endpoint, options = {}) => {
@@ -7,7 +8,7 @@ const authFetch = async (endpoint, options = {}) => {
     ...(token && { Authorization: `Bearer ${token}` }),
     ...options.headers,
   };
-  const res = await fetch(`/${endpoint}`, { ...options, headers });
+  const res = await fetch(`${API_BASE}/api/${endpoint}`, { ...options, headers });
   const data = await res.json();
   if (res.status === 401) {
     localStorage.removeItem('soulsync_token');
